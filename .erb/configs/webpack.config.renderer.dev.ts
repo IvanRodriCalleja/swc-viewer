@@ -32,10 +32,10 @@ if (
 ) {
 	console.log(
 		chalk.black.bgYellow.bold(
-			'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"'
+			'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
 		)
 	);
-	execSync('npm run postinstall');
+	execSync('yarn postinstall');
 }
 
 const configuration: webpack.Configuration = {
@@ -165,7 +165,7 @@ const configuration: webpack.Configuration = {
 		},
 		onBeforeSetupMiddleware() {
 			console.log('Starting Main Process...');
-			spawn('npm', ['run', 'start:main'], {
+			spawn('yarn', ['start:main'], {
 				shell: true,
 				env: process.env,
 				stdio: 'inherit',
