@@ -8,7 +8,7 @@
   "javascript.validate.enable": false,
   "javascript.format.enable": false,
   "typescript.format.enable": false,
-
+	"editor.formatOnSave": true,
   "search.exclude": {
     ".git": true,
     ".eslintcache": true,
@@ -19,5 +19,11 @@
     "test/**/__snapshots__": true,
     "package-lock.json": true,
     "*.{css,sass,scss}.d.ts": true
-  }
+  },
+	"explorer.experimental.fileNesting.enabled": true,
+	"explorer.experimental.fileNesting.patterns": {
+		"*.jsx": "$(capture).js, $(capture).test.jsx",
+		"*.tsx": "$(capture).ts, $(capture).test.tsx",
+		"package.json": "yarn.lock, .editorconfig, .eslintrc.js, .eslintignore"
+	}
 }
