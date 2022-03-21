@@ -13,6 +13,7 @@ import { app, BrowserWindow, shell, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
+import { setUpTopBarActions } from './topBarActions';
 
 export default class AppUpdater {
 	constructor() {
@@ -70,9 +71,15 @@ const createWindow = async () => {
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 		},
+		titleBarStyle: 'hidden',
+		trafficLightPosition: {
+			x: 20,
+			y: 14,
+		},
 	});
 
 	Menu.setApplicationMenu(new Menu());
+	setUpTopBarActions(mainWindow);
 
 	mainWindow.loadURL(resolveHtmlPath('index.html'));
 
