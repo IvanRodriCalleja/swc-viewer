@@ -1,5 +1,5 @@
 import { BrowserWindow, ipcRenderer, ipcMain } from 'electron';
-import { toggleMaximization } from '../ipcActions';
+import { toggleMaximization } from 'ipcActions';
 import { setUpTopBarActions } from './topBarActions';
 
 let isMaximized = false;

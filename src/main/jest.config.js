@@ -13,5 +13,6 @@ module.exports = {
 	roots: ['<rootDir>'],
 	moduleNameMapper: {
 		electron: '<rootDir>/test-utils/electron.ts',
+		'^ipcActions$': '<rootDir>/../ipcActions.ts',
 	},
 };
