@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import { toggleMaximization } from '../../../ipcActions';
+import { toggleMaximization } from 'ipcActions';
 import { TopDraggableAppBar } from './TopDraggableAppBar';
 
 describe('TopDraggableAppBar', () => {

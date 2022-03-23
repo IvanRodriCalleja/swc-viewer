@@ -7,6 +7,7 @@ module.exports = {
 		// Since React 17 and typescript 4.1 you can safely disable the rule
 		'react/react-in-jsx-scope': 'off',
 		'import/prefer-default-export': 'off',
+		'no-nested-ternary': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 2020,

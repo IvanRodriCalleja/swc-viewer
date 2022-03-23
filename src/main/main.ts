@@ -77,6 +77,7 @@ const createWindow = async () => {
 			y: 14,
 		},
 	});
+	mainWindow.maximize();
 
 	Menu.setApplicationMenu(new Menu());
 	setUpTopBarActions(mainWindow);

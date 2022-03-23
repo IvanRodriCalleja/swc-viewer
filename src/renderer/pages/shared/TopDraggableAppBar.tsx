@@ -1,5 +1,5 @@
 import { useColorModeValue, Box } from '@chakra-ui/react';
-import { toggleMaximization } from '../../../ipcActions';
+import { toggleMaximization } from 'ipcActions';
 
 export const TopDraggableAppBar = () => {
 	const bg = useColorModeValue('gray.100', 'gray.900');
