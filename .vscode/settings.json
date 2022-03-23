@@ -24,6 +24,7 @@
 	"explorer.experimental.fileNesting.patterns": {
 		"*.jsx": "$(capture).js, $(capture).test.jsx",
 		"*.tsx": "$(capture).ts, $(capture).test.tsx",
+		"*.page.tsx": "$(capture).ts, $(capture).page.test.tsx",
 		"package.json": "yarn.lock, .editorconfig, .eslintrc.js, .eslintignore"
 	}
 }

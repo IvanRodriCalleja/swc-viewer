@@ -1,3 +1,26 @@
+body,
+#root {
+	height: 100vh;
+}
+
 #app-top-bar {
 	-webkit-app-region: drag;
+}
+
+.mask-left {
+	-webkit-mask-image: radial-gradient(
+		circle 12px at 0 0,
+		transparent 0,
+		transparent 12px,
+		black 0px
+	);
+}
+
+.mask-right {
+	-webkit-mask-image: radial-gradient(
+		circle 12px at 12px 0px,
+		transparent 0,
+		transparent 12px,
+		black 0px
+	);
 }

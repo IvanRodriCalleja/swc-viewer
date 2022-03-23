@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme, ColorModeScript } from '@chakra-ui/react';
 import { SwcViewerApp } from './SwcViewerApp';
 
 import './styles/global.css';
+import { ViewerProvider } from './pages/home/ViewerContext';
 
 const config = {
 	initialColorMode: 'dark',
@@ -17,7 +18,9 @@ root.render(
 	<>
 		<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 		<ChakraProvider theme={theme}>
-			<SwcViewerApp />
+			<ViewerProvider>
+				<SwcViewerApp />
+			</ViewerProvider>
 		</ChakraProvider>
 	</>
 );

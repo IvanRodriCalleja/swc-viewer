@@ -9,7 +9,7 @@ import {
 	TabType,
 } from './viewerContext/viewerContextReducer';
 
-type ViewerContextValue = {
+export type ViewerContextValue = {
 	state: ViewerState;
 	dispatch: Dispatch<ViewerActionType>;
 };
@@ -19,7 +19,7 @@ const initialState: ViewerState = {
 	tabs: [
 		{
 			id: 0,
-			type: TabType.Initial,
+			type: TabType.SwcBabelPluginComparer,
 			fileTransform: {
 				name: 'Untitled-0',
 				path: 'Untitled-0',
