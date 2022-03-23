@@ -2,7 +2,6 @@ import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
 import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
 
 export enum TabType {
-	Initial,
 	SwcBabelPluginComparer,
 }
 
@@ -102,7 +101,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 					...state.tabs,
 					{
 						id: tabId,
-						type: TabType.Initial,
+						type: TabType.SwcBabelPluginComparer,
 						fileTransform: {
 							name: `Untitled-${tabId}`,
 							path: `Untitled-${tabId}`,

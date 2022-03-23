@@ -8,6 +8,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'import/prefer-default-export': 'off',
 		'no-nested-ternary': 'off',
+		'react/require-default-props': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 2020,
