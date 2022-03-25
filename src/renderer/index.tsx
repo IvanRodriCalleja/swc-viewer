@@ -4,6 +4,7 @@ import { SwcViewerApp } from './SwcViewerApp';
 
 import './styles/global.css';
 import { ViewerProvider } from './pages/home/ViewerContext';
+import { prefetchNpmPackageVersions } from './server-resources/useNpmPackageVersions';
 
 const config = {
 	initialColorMode: 'dark',
@@ -24,3 +25,6 @@ root.render(
 		</ChakraProvider>
 	</>
 );
+
+prefetchNpmPackageVersions({ packageName: '@babel/core' });
+prefetchNpmPackageVersions({ packageName: '@swc/core' });
