@@ -4,9 +4,15 @@
     <meta charset="utf-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' 'unsafe-inline'"
+      content="
+				script-src 'self' 'unsafe-inline' cdn.jsdelivr.net ;
+				style-src 'self' 'unsafe-inline' cdn.jsdelivr.net;
+				img-src cdn.jsdelivr.net data:;
+				font-src cdn.jsdelivr.net;
+				worker-src blob:
+			"
     />
-    <title>Hello Electron React!</title>
+    <title>SWC viewer</title>
   </head>
   <body>
     <div id="root"></div>

@@ -13,7 +13,7 @@ export const SwcAndBabelComparer = ({ tab }: SwcAndBabelComparerProps) => {
 
 	const onFileUpload = (event: ProgressEvent<FileReader>, file: File) => {
 		dispatch({
-			type: ViewerAction.ChangeFileTransform,
+			type: ViewerAction.UpdateFileTransform,
 			payload: {
 				tabId: tab.id,
 				fileTransform: {

@@ -1,3 +1,5 @@
+import { BabelConfig } from 'models/BabelConfig';
+import { SwcConfig } from 'models/SwcConfig';
 import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
 import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
 
@@ -11,14 +13,14 @@ export type FileTransform = {
 	code: string;
 };
 
-export type TranspilerConfig = {
+export type TranspilerConfig<T> = {
 	version: string;
-	config: unknown;
+	config: T;
 };
 
 export type ComparerConfig = {
-	babel: TranspilerConfig;
-	swc: TranspilerConfig;
+	babel: TranspilerConfig<BabelConfig>;
+	swc: TranspilerConfig<SwcConfig>;
 };
 
 export type TabState = {
@@ -29,6 +31,7 @@ export type TabState = {
 };
 
 export type ViewerState = {
+	lastSwcVersion: string;
 	activeTabId: number | null;
 	tabs: TabState[];
 };
@@ -37,10 +40,11 @@ export enum ViewerAction {
 	AddTab,
 	DeleteTab,
 	ActivateTab,
-	ChangeTabType,
-	ChangeFileTransform,
-	ChangeBabelVersion,
-	ChangeSwcVersion,
+	UpdateTabType,
+	UpdateFileTransform,
+	UpdateBabelVersion,
+	UpdateSwcVersion,
+	UpdateSwcConfig,
 }
 
 export type ViewerActionType =
@@ -56,31 +60,38 @@ export type ViewerActionType =
 			payload: number;
 	  }
 	| {
-			type: ViewerAction.ChangeTabType;
+			type: ViewerAction.UpdateTabType;
 			payload: {
 				tabId: number;
 				type: TabType;
 			};
 	  }
 	| {
-			type: ViewerAction.ChangeFileTransform;
+			type: ViewerAction.UpdateFileTransform;
 			payload: {
 				tabId: number;
 				fileTransform: FileTransform;
 			};
 	  }
 	| {
-			type: ViewerAction.ChangeBabelVersion;
+			type: ViewerAction.UpdateBabelVersion;
 			payload: {
 				tabId: number;
 				version: string;
 			};
 	  }
 	| {
-			type: ViewerAction.ChangeSwcVersion;
+			type: ViewerAction.UpdateSwcVersion;
 			payload: {
 				tabId: number;
 				version: string;
+			};
+	  }
+	| {
+			type: ViewerAction.UpdateSwcConfig;
+			payload: {
+				tabId: number;
+				config: TranspilerConfig<SwcConfig>;
 			};
 	  };
 
@@ -96,6 +107,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 				state.tabs.length === 0 ? 1 : state.tabs[state.tabs.length - 1].id + 1;
 
 			return {
+				...state,
 				activeTabId: tabId,
 				tabs: [
 					...state.tabs,
@@ -109,7 +121,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 						},
 						comparerConfig: {
 							swc: {
-								version: '',
+								version: state.lastSwcVersion,
 								config: swcBaseConfig,
 							},
 							babel: {
@@ -141,7 +153,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 				...state,
 				activeTabId: action.payload,
 			};
-		case ViewerAction.ChangeTabType: {
+		case ViewerAction.UpdateTabType: {
 			return {
 				...state,
 				tabs: state.tabs.map((tab) =>
@@ -151,7 +163,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 				),
 			};
 		}
-		case ViewerAction.ChangeFileTransform: {
+		case ViewerAction.UpdateFileTransform: {
 			return {
 				...state,
 				tabs: state.tabs.map((tab) =>
@@ -161,7 +173,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 				),
 			};
 		}
-		case ViewerAction.ChangeBabelVersion: {
+		case ViewerAction.UpdateBabelVersion: {
 			return {
 				...state,
 				tabs: state.tabs.map((tab) =>
@@ -180,7 +192,23 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 				),
 			};
 		}
-		case ViewerAction.ChangeSwcVersion: {
+		case ViewerAction.UpdateSwcConfig: {
+			return {
+				...state,
+				tabs: state.tabs.map((tab) =>
+					tab.id === action.payload.tabId
+						? {
+								...tab,
+								comparerConfig: {
+									...tab.comparerConfig,
+									swc: action.payload.config,
+								},
+						  }
+						: tab
+				),
+			};
+		}
+		case ViewerAction.UpdateSwcVersion: {
 			return {
 				...state,
 				tabs: state.tabs.map((tab) =>

@@ -92,7 +92,7 @@ const createWindow = async () => {
 		(details, callback) => {
 			callback({
 				responseHeaders: {
-					'Access-Control-Allow-Origin': ['*'],
+					'access-control-allow-origin': ['*'],
 					...details.responseHeaders,
 				},
 			});

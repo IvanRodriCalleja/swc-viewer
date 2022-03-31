@@ -9,6 +9,7 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'no-nested-ternary': 'off',
 		'react/require-default-props': 'off',
+		'react/jsx-props-no-spreading': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 2020,

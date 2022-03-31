@@ -90,6 +90,7 @@ describe('SwcAndBabelComparer', () => {
 			.mockImplementation(() => ({
 				dispatch: jest.fn(),
 				state: {
+					lastSwcVersion: '1.1.1',
 					activeTabId: 1,
 					tabs: [],
 				},
@@ -102,7 +103,7 @@ describe('SwcAndBabelComparer', () => {
 		const { dispatch } = contextMock.mock.results[0]
 			.value as viewerContext.ViewerContextValue;
 		expect(dispatch).toHaveBeenCalledWith({
-			type: ViewerAction.ChangeFileTransform,
+			type: ViewerAction.UpdateFileTransform,
 			payload: {
 				fileTransform: {
 					code: 'fake-result',
