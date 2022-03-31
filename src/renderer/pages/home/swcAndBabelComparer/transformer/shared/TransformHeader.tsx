@@ -12,16 +12,20 @@ import {
 	ModalOverlay,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { TabState } from 'renderer/pages/home/viewerContext/viewerContextReducer';
-import { SwcLogo } from 'renderer/pages/shared/SwcLogo';
-import { SwcConfigForm } from './swcTransformHeader/SwcConfigForm';
+import { ReactNode } from 'react';
 
-type SwcTransformProps = {
-	tab: TabState;
-	packageName: string;
+type ChildrenProps = {
+	onClose: () => void;
 };
 
-export const SwcTransformHeader = ({ tab, packageName }: SwcTransformProps) => {
+type TransformProps = {
+	modalTitle: string;
+	logo: ReactNode;
+	children: (props: ChildrenProps) => ReactNode;
+};
+
+export const TransformHeader = (props: TransformProps) => {
+	const { logo, modalTitle, children } = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
@@ -34,7 +38,7 @@ export const SwcTransformHeader = ({ tab, packageName }: SwcTransformProps) => {
 			height="40px"
 			marginBottom="16px"
 		>
-			<SwcLogo />
+			{logo}
 
 			<IconButton
 				aria-label="config"
@@ -45,15 +49,9 @@ export const SwcTransformHeader = ({ tab, packageName }: SwcTransformProps) => {
 			<Modal isOpen={isOpen} onClose={onClose} size="6xl">
 				<ModalOverlay />
 				<ModalContent height="calc(100% - 7.5rem)">
-					<ModalHeader>SWC configuration (.swcrc)</ModalHeader>
+					<ModalHeader>{modalTitle}</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody flex="auto">
-						<SwcConfigForm
-							tab={tab}
-							packageName={packageName}
-							onSubmit={onClose}
-						/>
-					</ModalBody>
+					<ModalBody flex="auto">{children({ onClose })}</ModalBody>
 					<ModalFooter>
 						<Button onClick={onClose} mr={3}>
 							Cancel

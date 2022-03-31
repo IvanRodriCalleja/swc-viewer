@@ -9,7 +9,7 @@ import {
 	TabState,
 	ViewerActionType,
 	ViewerAction,
-	TranspilerConfig,
+	TransformerConfig,
 } from './viewerContextReducer';
 
 const baseTab: TabState = {
@@ -38,6 +38,7 @@ describe('viewerContextReducer', () => {
 		it('Should add tab', () => {
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab],
 			};
@@ -55,7 +56,7 @@ describe('viewerContextReducer', () => {
 				},
 				comparerConfig: {
 					babel: {
-						version: '',
+						version: '1.2.3',
 						config: babelBaseConfig,
 					},
 					swc: {
@@ -69,6 +70,7 @@ describe('viewerContextReducer', () => {
 		it('Should add tab when no tabs exist', () => {
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [],
 			};
@@ -86,7 +88,7 @@ describe('viewerContextReducer', () => {
 				},
 				comparerConfig: {
 					babel: {
-						version: '',
+						version: '1.2.3',
 						config: babelBaseConfig,
 					},
 					swc: {
@@ -102,6 +104,7 @@ describe('viewerContextReducer', () => {
 
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -119,7 +122,7 @@ describe('viewerContextReducer', () => {
 				},
 				comparerConfig: {
 					babel: {
-						version: '',
+						version: '1.2.3',
 						config: babelBaseConfig,
 					},
 					swc: {
@@ -135,6 +138,7 @@ describe('viewerContextReducer', () => {
 		it('Should delete tab when only exist', () => {
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [baseTab],
 			};
@@ -154,6 +158,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 2,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -193,6 +198,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -232,6 +238,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -252,6 +259,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -270,6 +278,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -290,6 +299,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -311,6 +321,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -334,6 +345,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -361,6 +373,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -390,6 +403,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -411,6 +425,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -434,6 +449,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -455,6 +471,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -478,11 +495,12 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const updateConfig: TranspilerConfig<SwcConfig> = {
+			const updateConfig: TransformerConfig<SwcConfig> = {
 				version: '1.1.1',
 				config: {
 					jsc: {
@@ -510,11 +528,12 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
 				lastSwcVersion: '1.2.3',
+				lastBabelVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const updateConfig: TranspilerConfig<SwcConfig> = {
+			const updateConfig: TransformerConfig<SwcConfig> = {
 				version: '1.1.1',
 				config: {
 					jsc: {
