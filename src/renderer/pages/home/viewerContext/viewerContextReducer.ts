@@ -13,14 +13,14 @@ export type FileTransform = {
 	code: string;
 };
 
-export type TranspilerConfig<T> = {
+export type TransformerConfig<T> = {
 	version: string;
 	config: T;
 };
 
 export type ComparerConfig = {
-	babel: TranspilerConfig<BabelConfig>;
-	swc: TranspilerConfig<SwcConfig>;
+	babel: TransformerConfig<BabelConfig>;
+	swc: TransformerConfig<SwcConfig>;
 };
 
 export type TabState = {
@@ -32,6 +32,7 @@ export type TabState = {
 
 export type ViewerState = {
 	lastSwcVersion: string;
+	lastBabelVersion: string;
 	activeTabId: number | null;
 	tabs: TabState[];
 };
@@ -45,6 +46,7 @@ export enum ViewerAction {
 	UpdateBabelVersion,
 	UpdateSwcVersion,
 	UpdateSwcConfig,
+	UpdateBabelConfig,
 }
 
 export type ViewerActionType =
@@ -91,7 +93,14 @@ export type ViewerActionType =
 			type: ViewerAction.UpdateSwcConfig;
 			payload: {
 				tabId: number;
-				config: TranspilerConfig<SwcConfig>;
+				config: TransformerConfig<SwcConfig>;
+			};
+	  }
+	| {
+			type: ViewerAction.UpdateBabelConfig;
+			payload: {
+				tabId: number;
+				config: TransformerConfig<BabelConfig>;
 			};
 	  };
 
@@ -125,7 +134,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 								config: swcBaseConfig,
 							},
 							babel: {
-								version: '',
+								version: state.lastBabelVersion,
 								config: babelBaseConfig,
 							},
 						},
@@ -221,6 +230,22 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 										...tab.comparerConfig.swc,
 										version: action.payload.version,
 									},
+								},
+						  }
+						: tab
+				),
+			};
+		}
+		case ViewerAction.UpdateBabelConfig: {
+			return {
+				...state,
+				tabs: state.tabs.map((tab) =>
+					tab.id === action.payload.tabId
+						? {
+								...tab,
+								comparerConfig: {
+									...tab.comparerConfig,
+									babel: action.payload.config,
 								},
 						  }
 						: tab

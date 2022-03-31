@@ -1,6 +1,6 @@
 import {
 	FileTransform,
-	TranspilerConfig,
+	TransformerConfig,
 } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { SwcConfig } from '../../models/SwcConfig';
 import { getSwc } from './swc/swcLoader';
@@ -17,7 +17,7 @@ const handleSwcError = (error: unknown): string => {
 };
 
 type TransformSwc = {
-	transformConfig: TranspilerConfig<SwcConfig>;
+	transformConfig: TransformerConfig<SwcConfig>;
 	file: FileTransform;
 };
 

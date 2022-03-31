@@ -4,7 +4,7 @@ import { editor } from 'monaco-editor';
 import { useRef } from 'react';
 import { TabState } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { swcJsonSchema } from 'renderer/utils/swcJsonSchema';
-import { JsonConfigEditor } from '../../../shared/JsonConfigEditor';
+import { JsonConfigEditor } from '../../shared/JsonConfigEditor';
 
 type SwcConfigEditorProps = {
 	tab: TabState;

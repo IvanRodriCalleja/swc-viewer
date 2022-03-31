@@ -2,11 +2,11 @@ import { Box, Select, useColorModeValue } from '@chakra-ui/react';
 import { useField } from 'formik';
 import { useNpmPackageVersions } from 'renderer/server-resources/useNpmPackageVersions';
 
-type SwcVersionProps = {
+type SelectVersionProps = {
 	packageName: string;
 };
 
-export const SwcVersion = ({ packageName }: SwcVersionProps) => {
+export const SelectVersion = ({ packageName }: SelectVersionProps) => {
 	const { data: versions } = useNpmPackageVersions({ packageName });
 	const headerBg = useColorModeValue('gray.300', 'gray.900');
 	const selectBg = useColorModeValue('gray.300', 'gray.700');

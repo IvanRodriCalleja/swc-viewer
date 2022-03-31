@@ -1,30 +1,34 @@
 import { Box } from '@chakra-ui/react';
 import { Suspense } from 'react';
-import { SwcLogo } from 'renderer/pages/shared/SwcLogo';
-import { TabState } from '../../viewerContext/viewerContextReducer';
-import { TransformHeader } from './shared/TransformHeader';
-import { SwcOutput } from './swcTransform/SwcOutput';
-import { SwcConfigForm } from './swcTransform/SwcConfigForm';
+import { BabelLogo } from 'renderer/pages/shared/BabelLogo';
 
-type SwcTransformProps = {
+import { TabState } from '../../viewerContext/viewerContextReducer';
+import { BabelConfigForm } from './babelTransform/BabelConfigForm';
+import { BabelOutput } from './babelTransform/BabelOutput';
+import { TransformHeader } from './shared/TransformHeader';
+
+type BabelTransformProps = {
 	tab: TabState;
 };
 
-export const SwcTransform = ({ tab }: SwcTransformProps) => {
+export const BabelTransform = ({ tab }: BabelTransformProps) => {
 	return (
 		<Box width="full" height="full">
 			<TransformHeader
-				logo={<SwcLogo />}
-				modalTitle="SWC configuration (.swcrc)"
+				logo={<BabelLogo />}
+				modalTitle="Babel configuration (.babelrc)"
 			>
 				{({ onClose }) => (
-					<SwcConfigForm tab={tab} packageName="@swc/core" onSubmit={onClose} />
+					<BabelConfigForm
+						tab={tab}
+						packageName="@babel/core"
+						onSubmit={onClose}
+					/>
 				)}
 			</TransformHeader>
-
 			<Box width="full" height="calc(100% - 56px)" borderWidth="1px">
 				<Suspense fallback={<div>Loading...</div>}>
-					<SwcOutput tab={tab} />
+					<BabelOutput tab={tab} />
 				</Suspense>
 			</Box>
 		</Box>

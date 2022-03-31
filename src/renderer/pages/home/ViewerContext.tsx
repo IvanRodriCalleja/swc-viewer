@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
 import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
+import { useGetLastBabelVersion } from './viewerContext/useGetLastBabelVersion';
 import { useGetLastSwcVersion } from './viewerContext/useGetLastSwcVersion';
 
 import {
@@ -45,6 +46,7 @@ const defaultTabState: TabState = {
 
 const defaultState: ViewerState = {
 	lastSwcVersion: '',
+	lastBabelVersion: '',
 	activeTabId: 0,
 	tabs: [defaultTabState],
 };
@@ -58,17 +60,19 @@ const ViewerContext = createContext<ViewerContextValue>(initialValue);
 
 export const ViewerProvider: FC<unknown> = ({ children }) => {
 	const lastSwcVersion = useGetLastSwcVersion();
+	const lastBabelVersion = useGetLastBabelVersion();
 
 	const initialState: ViewerState = useMemo(
 		() => ({
 			...defaultState,
 			lastSwcVersion,
+			lastBabelVersion,
 			tabs: [
 				{
 					...defaultTabState,
 					comparerConfig: {
 						babel: {
-							version: '',
+							version: lastBabelVersion,
 							config: babelBaseConfig,
 						},
 						swc: {
@@ -79,7 +83,7 @@ export const ViewerProvider: FC<unknown> = ({ children }) => {
 				},
 			],
 		}),
-		[lastSwcVersion]
+		[lastSwcVersion, lastBabelVersion]
 	);
 
 	const [state, dispatch] = useReducer(viewerReducer, initialState);

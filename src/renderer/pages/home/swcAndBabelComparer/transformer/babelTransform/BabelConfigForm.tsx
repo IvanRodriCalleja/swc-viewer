@@ -5,27 +5,27 @@ import {
 	ViewerAction,
 } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { useViewerContext } from 'renderer/pages/home/ViewerContext';
-import { SwcVersion } from './swcConfigForm/SwcVersion';
-import { SwcConfigEditor } from './swcConfigForm/SwcConfigEditor';
+import { SelectVersion } from '../shared/SelectVersion';
+import { BabelConfigEditor } from './babelConfigForm/BabelConfigEditor';
 
-type SwcConfigFormProps = {
+type BabelConfigFormProps = {
 	tab: TabState;
 	packageName: string;
 	onSubmit: () => void;
 };
 
-export const SwcConfigForm = ({
+export const BabelConfigForm = ({
 	tab,
 	packageName,
 	onSubmit,
-}: SwcConfigFormProps) => {
+}: BabelConfigFormProps) => {
 	const { dispatch } = useViewerContext();
-	const onFormSubmit = (swc: { version: string; config: string }) => {
+	const onFormSubmit = (babel: { version: string; config: string }) => {
 		dispatch({
-			type: ViewerAction.UpdateSwcConfig,
+			type: ViewerAction.UpdateBabelConfig,
 			payload: {
 				tabId: tab.id,
-				config: { ...swc, config: JSON.parse(swc.config) },
+				config: { ...babel, config: JSON.parse(babel.config) },
 			},
 		});
 		onSubmit();
@@ -34,8 +34,8 @@ export const SwcConfigForm = ({
 	return (
 		<Formik
 			initialValues={{
-				version: tab.comparerConfig.swc.version,
-				config: JSON.stringify(tab.comparerConfig.swc.config, null, 2),
+				version: tab.comparerConfig.babel.version,
+				config: JSON.stringify(tab.comparerConfig.babel.config, null, 2),
 			}}
 			onSubmit={onFormSubmit}
 			validateOnChange
@@ -48,11 +48,11 @@ export const SwcConfigForm = ({
 				>
 					<Box display="flex" flexDirection="row" height="full" gap="16px">
 						<Box width="232px">
-							<SwcVersion packageName={packageName} />
+							<SelectVersion packageName={packageName} />
 						</Box>
 
 						<Box height="full" flexGrow={1}>
-							<SwcConfigEditor tab={tab} />
+							<BabelConfigEditor tab={tab} />
 						</Box>
 					</Box>
 				</form>
