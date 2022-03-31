@@ -1,10 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import { ChakraProvider, extendTheme, ColorModeScript } from '@chakra-ui/react';
+import { Suspense } from 'react';
 import { SwcViewerApp } from './SwcViewerApp';
 
 import './styles/global.css';
 import { ViewerProvider } from './pages/home/ViewerContext';
 import { prefetchNpmPackageVersions } from './server-resources/useNpmPackageVersions';
+import { QueryCache } from './server-resources/QueryCache';
 
 const config = {
 	initialColorMode: 'dark',
@@ -19,9 +21,13 @@ root.render(
 	<>
 		<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 		<ChakraProvider theme={theme}>
-			<ViewerProvider>
-				<SwcViewerApp />
-			</ViewerProvider>
+			<QueryCache>
+				<Suspense fallback={<div />}>
+					<ViewerProvider>
+						<SwcViewerApp />
+					</ViewerProvider>
+				</Suspense>
+			</QueryCache>
 		</ChakraProvider>
 	</>
 );

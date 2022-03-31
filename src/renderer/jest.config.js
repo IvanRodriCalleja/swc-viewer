@@ -13,6 +13,7 @@ module.exports = {
 		'\\.(css|less|sass|scss)$': 'identity-obj-proxy',
 		'^renderer/(.*)': '<rootDir>/$1',
 		'^ipcActions$': '<rootDir>/../ipcActions.ts',
+		'^services/(.*)': '<rootDir>/../services/$1',
 	},
 	moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
 	moduleDirectories: ['node_modules', 'release/app/node_modules'],

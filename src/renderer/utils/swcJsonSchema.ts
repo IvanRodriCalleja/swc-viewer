@@ -2,9 +2,11 @@ import type { JSONSchema6 } from 'json-schema';
 
 export const swcJsonSchema: JSONSchema6 = {
 	type: 'object',
+	required: ['jsc'],
 	properties: {
 		jsc: {
 			type: 'object',
+			required: ['parser'],
 			properties: {
 				parser: {
 					type: 'object',

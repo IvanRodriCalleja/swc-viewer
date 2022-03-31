@@ -1,5 +1,7 @@
+import { SwcConfig } from 'models/SwcConfig';
 import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
 import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
+
 import {
 	ViewerState,
 	viewerReducer,
@@ -7,6 +9,7 @@ import {
 	TabState,
 	ViewerActionType,
 	ViewerAction,
+	TranspilerConfig,
 } from './viewerContextReducer';
 
 const baseTab: TabState = {
@@ -34,6 +37,7 @@ describe('viewerContextReducer', () => {
 		const action: ViewerActionType = { type: ViewerAction.AddTab };
 		it('Should add tab', () => {
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab],
 			};
@@ -55,7 +59,7 @@ describe('viewerContextReducer', () => {
 						config: babelBaseConfig,
 					},
 					swc: {
-						version: '',
+						version: '1.2.3',
 						config: swcBaseConfig,
 					},
 				},
@@ -64,6 +68,7 @@ describe('viewerContextReducer', () => {
 
 		it('Should add tab when no tabs exist', () => {
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [],
 			};
@@ -85,7 +90,7 @@ describe('viewerContextReducer', () => {
 						config: babelBaseConfig,
 					},
 					swc: {
-						version: '',
+						version: '1.2.3',
 						config: swcBaseConfig,
 					},
 				},
@@ -96,6 +101,7 @@ describe('viewerContextReducer', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -117,7 +123,7 @@ describe('viewerContextReducer', () => {
 						config: babelBaseConfig,
 					},
 					swc: {
-						version: '',
+						version: '1.2.3',
 						config: swcBaseConfig,
 					},
 				},
@@ -128,6 +134,7 @@ describe('viewerContextReducer', () => {
 	describe('DeleteTab action', () => {
 		it('Should delete tab when only exist', () => {
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: null,
 				tabs: [baseTab],
 			};
@@ -146,6 +153,7 @@ describe('viewerContextReducer', () => {
 		it('Should delete tab type', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 2,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -184,6 +192,7 @@ describe('viewerContextReducer', () => {
 		it('Should delete selected tab type', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -219,9 +228,10 @@ describe('viewerContextReducer', () => {
 			expect(newState.activeTabId).toEqual(2);
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -238,9 +248,10 @@ describe('viewerContextReducer', () => {
 	});
 
 	describe('ActivateTab action', () => {
-		it('Should change activated tab', () => {
+		it('Should update activated tab', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -255,9 +266,10 @@ describe('viewerContextReducer', () => {
 			expect(newState.activeTabId).toEqual(2);
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -273,19 +285,20 @@ describe('viewerContextReducer', () => {
 		});
 	});
 
-	describe('ChangeTabType action', () => {
-		it('Should change tab type', () => {
+	describe('UpdateTabType action', () => {
+		it('Should update tab type', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 1;
+			const tabIdToUpdate = 1;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeTabType,
+				type: ViewerAction.UpdateTabType,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					type: TabType.SwcBabelPluginComparer,
 				},
 			};
@@ -294,18 +307,19 @@ describe('viewerContextReducer', () => {
 			expect(newState.tabs[0].type).toEqual(TabType.SwcBabelPluginComparer);
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 200;
+			const tabIdToUpdate = 200;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeTabType,
+				type: ViewerAction.UpdateTabType,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					type: TabType.SwcBabelPluginComparer,
 				},
 			};
@@ -315,10 +329,11 @@ describe('viewerContextReducer', () => {
 		});
 	});
 
-	describe('ChangeFileTransform action', () => {
-		it('Should change tab babel version', () => {
+	describe('UpdateFileTransform action', () => {
+		it('Should update tab babel version', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -329,11 +344,11 @@ describe('viewerContextReducer', () => {
 				path: 'test-path',
 			};
 
-			const tabIdToChange = 1;
+			const tabIdToUpdate = 1;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeFileTransform,
+				type: ViewerAction.UpdateFileTransform,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					fileTransform,
 				},
 			};
@@ -342,9 +357,10 @@ describe('viewerContextReducer', () => {
 			expect(newState.tabs[0].fileTransform).toEqual(fileTransform);
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
@@ -355,11 +371,11 @@ describe('viewerContextReducer', () => {
 				path: 'test-path',
 			};
 
-			const tabIdToChange = 200;
+			const tabIdToUpdate = 200;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeFileTransform,
+				type: ViewerAction.UpdateFileTransform,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					fileTransform,
 				},
 			};
@@ -369,19 +385,20 @@ describe('viewerContextReducer', () => {
 		});
 	});
 
-	describe('ChangeBabelVersion action', () => {
-		it('Should change tab file transform', () => {
+	describe('UpdateBabelVersion action', () => {
+		it('Should update tab file transform', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 1;
+			const tabIdToUpdate = 1;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeBabelVersion,
+				type: ViewerAction.UpdateBabelVersion,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					version: '1.1.1',
 				},
 			};
@@ -390,18 +407,19 @@ describe('viewerContextReducer', () => {
 			expect(newState.tabs[0].comparerConfig.babel.version).toEqual('1.1.1');
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 200;
+			const tabIdToUpdate = 200;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeBabelVersion,
+				type: ViewerAction.UpdateBabelVersion,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					version: '1.1.1',
 				},
 			};
@@ -411,19 +429,20 @@ describe('viewerContextReducer', () => {
 		});
 	});
 
-	describe('ChangeSwcVersion action', () => {
-		it('Should change tab swc version', () => {
+	describe('UpdateSwcVersion action', () => {
+		it('Should update tab swc version', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 1;
+			const tabIdToUpdate = 1;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeSwcVersion,
+				type: ViewerAction.UpdateSwcVersion,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					version: '1.1.1',
 				},
 			};
@@ -432,19 +451,86 @@ describe('viewerContextReducer', () => {
 			expect(newState.tabs[0].comparerConfig.swc.version).toEqual('1.1.1');
 		});
 
-		it('Should not change state when tab id does not exist', () => {
+		it('Should not update state when tab id does not exist', () => {
 			const secondBaseTab = { ...baseTab, id: 2 };
 			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
 				activeTabId: 1,
 				tabs: [baseTab, secondBaseTab],
 			};
 
-			const tabIdToChange = 200;
+			const tabIdToUpdate = 200;
 			const action: ViewerActionType = {
-				type: ViewerAction.ChangeSwcVersion,
+				type: ViewerAction.UpdateSwcVersion,
 				payload: {
-					tabId: tabIdToChange,
+					tabId: tabIdToUpdate,
 					version: '1.1.1',
+				},
+			};
+
+			const newState = viewerReducer(initialState, action);
+			expect(newState).toEqual(initialState);
+		});
+	});
+
+	describe('UpdateSwcConfig action', () => {
+		it('Should update tab swc version', () => {
+			const secondBaseTab = { ...baseTab, id: 2 };
+			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
+				activeTabId: 1,
+				tabs: [baseTab, secondBaseTab],
+			};
+
+			const updateConfig: TranspilerConfig<SwcConfig> = {
+				version: '1.1.1',
+				config: {
+					jsc: {
+						parser: {
+							syntax: 'ecmascript',
+						},
+					},
+				},
+			};
+
+			const tabIdToUpdate = 1;
+			const action: ViewerActionType = {
+				type: ViewerAction.UpdateSwcConfig,
+				payload: {
+					tabId: tabIdToUpdate,
+					config: updateConfig,
+				},
+			};
+
+			const newState = viewerReducer(initialState, action);
+			expect(newState.tabs[0].comparerConfig.swc).toEqual(updateConfig);
+		});
+
+		it('Should not update state when tab id does not exist', () => {
+			const secondBaseTab = { ...baseTab, id: 2 };
+			const initialState: ViewerState = {
+				lastSwcVersion: '1.2.3',
+				activeTabId: 1,
+				tabs: [baseTab, secondBaseTab],
+			};
+
+			const updateConfig: TranspilerConfig<SwcConfig> = {
+				version: '1.1.1',
+				config: {
+					jsc: {
+						parser: {
+							syntax: 'ecmascript',
+						},
+					},
+				},
+			};
+
+			const tabIdToUpdate = 200;
+			const action: ViewerActionType = {
+				type: ViewerAction.UpdateSwcConfig,
+				payload: {
+					tabId: tabIdToUpdate,
+					config: updateConfig,
 				},
 			};
 
