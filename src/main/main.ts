@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
 import { setUpTopBarActions } from './topBarActions';
+import { setUpTransformActions } from './transform';
 
 export default class AppUpdater {
 	constructor() {
@@ -81,6 +82,7 @@ const createWindow = async () => {
 
 	Menu.setApplicationMenu(new Menu());
 	setUpTopBarActions(mainWindow);
+	setUpTransformActions();
 
 	mainWindow.webContents.session.webRequest.onBeforeSendHeaders(
 		(details, callback) => {

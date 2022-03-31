@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 type UnpkgSearchResponse = {
 	versions: {
 		[key: string]: {
