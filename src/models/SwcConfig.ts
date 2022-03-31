@@ -203,7 +203,7 @@ export interface TransformationOutput {
 	code: string;
 }
 
-export type Plugins = [string | [string, never]];
+export type Plugin = string | [string, never];
 
 export interface SwcConfig {
 	jsc: {
@@ -211,7 +211,7 @@ export interface SwcConfig {
 		target?: EsVersion;
 		loose?: boolean;
 		experimental?: {
-			plugins?: Plugins;
+			plugins?: Plugin[];
 		};
 		minify?: {
 			compress?: boolean | CompressOptions;

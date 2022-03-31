@@ -30,8 +30,6 @@ export const UploadedContent = ({ fileTransform }: UploadedContentProps) => {
 		? 'typescript'
 		: 'javascript';
 
-	console.log({ viewMode });
-
 	return (
 		<>
 			<IconButton
