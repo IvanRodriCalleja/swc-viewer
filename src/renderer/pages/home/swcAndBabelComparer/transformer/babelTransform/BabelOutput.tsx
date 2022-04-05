@@ -7,10 +7,12 @@ type BabelOutputProps = {
 };
 
 export const BabelOutput = ({ tab }: BabelOutputProps) => {
-	const { data } = useTransformBabel({
+	const { data, error } = useTransformBabel({
 		file: tab.fileTransform,
 		transformConfig: tab.comparerConfig.babel,
 	});
 
-	return <OutputEditor code={data as string} viewMode="javascript" />;
+	const code = data || (error as string);
+
+	return <OutputEditor code={code} viewMode="javascript" />;
 };

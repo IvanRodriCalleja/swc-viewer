@@ -10,6 +10,7 @@ module.exports = {
 		'no-nested-ternary': 'off',
 		'react/require-default-props': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'@typescript-eslint/no-throw-literal': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 2020,

@@ -16,7 +16,7 @@ const transformBabel = (transform: TransformBabel) =>
 	window.electron.ipcRenderer
 		.invoke('transform-babel', transform)
 		.then((result: string) => result)
-		.catch((error) => console.log({ error }));
+		.catch((error) => error.toString());
 
 export const useTransformBabel = (transform: TransformBabel) => {
 	return useQuery([resourceKey, transform], () => transformBabel(transform), {

@@ -7,6 +7,7 @@ import {
 	downloadPackage,
 	isPackageDownloaded,
 	loadPackage,
+	packageCacheFolder,
 } from '../shared/packageManager';
 
 const binaryBinding = {
@@ -51,8 +52,6 @@ const isMusl = () => {
 		return !glibcVersionRuntime;
 	}
 };
-
-const packageCacheFolder = join(process.cwd(), '.package_cache');
 
 const swcPackageName = '@swc/core';
 

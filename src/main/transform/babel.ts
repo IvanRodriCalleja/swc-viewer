@@ -22,8 +22,7 @@ export const transformBabel = async ({
 	const babel = await getBabel(version);
 
 	const plugins = await loadPlugins(config.plugins);
-
-	const transformed = (await babel.transformAsync(code, {
+	const transformed = (await babel.transform(code, {
 		...config,
 		plugins,
 	})) as BabelFileResult;

@@ -16,7 +16,7 @@ const transformSwc = (transform: TransformSwc) =>
 	window.electron.ipcRenderer
 		.invoke('transform-swc', transform)
 		.then((result: string) => result)
-		.catch((error) => console.log({ error }));
+		.catch((error) => error.toString());
 
 export const useTransformSwc = (transform: TransformSwc) => {
 	return useQuery([resourceKey, transform], () => transformSwc(transform), {
