@@ -32,5 +32,5 @@ root.render(
 	</>
 );
 
-prefetchNpmPackageVersions({ packageName: '@babel/core' });
+prefetchNpmPackageVersions({ packageName: '@babel/standalone' });
 prefetchNpmPackageVersions({ packageName: '@swc/core' });

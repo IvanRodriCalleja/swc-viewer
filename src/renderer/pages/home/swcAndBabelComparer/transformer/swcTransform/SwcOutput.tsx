@@ -7,10 +7,12 @@ type SwcOutputProps = {
 };
 
 export const SwcOutput = ({ tab }: SwcOutputProps) => {
-	const { data } = useTransformSwc({
+	const { data, error } = useTransformSwc({
 		file: tab.fileTransform,
 		transformConfig: tab.comparerConfig.swc,
 	});
 
-	return <OutputEditor code={data as string} viewMode="javascript" />;
+	const code = data || (error as string);
+
+	return <OutputEditor code={code} viewMode="javascript" />;
 };

@@ -21,7 +21,7 @@ export const BabelTransform = ({ tab }: BabelTransformProps) => {
 				{({ onClose }) => (
 					<BabelConfigForm
 						tab={tab}
-						packageName="@babel/core"
+						packageName="@babel/standalone"
 						onSubmit={onClose}
 					/>
 				)}

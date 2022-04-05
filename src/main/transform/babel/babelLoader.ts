@@ -5,7 +5,7 @@ import {
 	loadPackage,
 } from '../shared/packageManager';
 
-const babelPackageName = '@babel/core';
+const babelPackageName = '@babel/standalone';
 
 const babelMemoryCache: { [version: string]: BabelModule } = {};
 

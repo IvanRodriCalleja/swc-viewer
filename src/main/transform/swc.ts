@@ -43,6 +43,6 @@ export const transformSwc = async ({ transformConfig, file }: TransformSwc) => {
 		});
 		return transformed.code;
 	} catch (error) {
-		return handleSwcError(error);
+		throw handleSwcError(error);
 	}
 };

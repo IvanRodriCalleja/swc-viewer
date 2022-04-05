@@ -2,7 +2,7 @@ import { useNpmPackageVersions } from 'renderer/server-resources/useNpmPackageVe
 
 export const useGetLastBabelVersion = () => {
 	const versions = useNpmPackageVersions({
-		packageName: '@babel/core',
+		packageName: '@babel/standalone',
 		versionsCount: 1,
 	});
 

@@ -14,7 +14,9 @@ type DownloadPackageArgs = {
 	version: string;
 };
 
-const packageCacheFolder = join(process.cwd(), '.package_cache');
+const homedir = require('os').homedir();
+
+export const packageCacheFolder = join(homedir, '.package_cache');
 
 export const downloadPackage = async ({
 	packageName,
