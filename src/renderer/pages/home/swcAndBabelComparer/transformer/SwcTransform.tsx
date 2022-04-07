@@ -1,10 +1,10 @@
 import { Box } from '@chakra-ui/react';
-import { Suspense } from 'react';
 import { SwcLogo } from 'renderer/pages/shared/SwcLogo';
 import { TabState } from '../../viewerContext/viewerContextReducer';
 import { TransformHeader } from './shared/TransformHeader';
 import { SwcOutput } from './swcTransform/SwcOutput';
 import { SwcConfigForm } from './swcTransform/SwcConfigForm';
+import { OutputContainer } from './shared/OutputContainer';
 
 type SwcTransformProps = {
 	tab: TabState;
@@ -22,11 +22,9 @@ export const SwcTransform = ({ tab }: SwcTransformProps) => {
 				)}
 			</TransformHeader>
 
-			<Box width="full" height="calc(100% - 56px)" borderWidth="1px">
-				<Suspense fallback={<div>Loading...</div>}>
-					<SwcOutput tab={tab} />
-				</Suspense>
-			</Box>
+			<OutputContainer>
+				<SwcOutput tab={tab} />
+			</OutputContainer>
 		</Box>
 	);
 };

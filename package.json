@@ -3,15 +3,15 @@
   "description": "Desktop application to compare SWC and Babel output in real time",
   "scripts": {
     "build": "concurrently \"yarn build:preload\" \"yarn build:main\" \"yarn build:renderer\"",
-    "build:main": "cross-env NODE_ENV=development esbuild ./src/main/main.ts --bundle --outfile=release/app/dist/main/main.js --platform=node --external:electron",
-		"build:preload": "cross-env NODE_ENV=development esbuild ./src/main/preload.js --bundle --outfile=release/app/dist/main/preload.js --platform=node --external:electron",
+    "build:main": "cross-env NODE_ENV=production node ./.erb/configs/build.main.js",
+    "build:preload": "cross-env NODE_ENV=production esbuild ./src/main/preload.js --bundle --outfile=release/app/dist/main/preload.js --platform=node --external:electron",
     "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
     "package": "ts-node ./.erb/scripts/clean.js dist && yarn build && electron-builder build --publish never",
     "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts",
     "start": "ts-node ./.erb/scripts/check-port-in-use.js && yarn start:renderer",
-		"start:main": "cross-env NODE_ENV=development electron -r ts-node/register/transpile-only ./src/main/main.ts",
+    "start:main": "cross-env NODE_ENV=development electron -r ts-node/register/transpile-only ./src/main/main.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
     "test": "jest",
     "prepare": "husky install"
@@ -33,9 +33,9 @@
   "build": {
     "productName": "SWC Viewer",
     "appId": "org.erb.SwcViewer",
-		"asar": true,
+    "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
-		"files": [
+    "files": [
       "dist",
       "node_modules",
       "package.json"
@@ -190,6 +190,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@monaco-editor/react": "^4.3.1",
+    "chokidar": "^3.5.3",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.6",
     "electron-updater": "^4.6.5",

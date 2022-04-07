@@ -1,18 +1,31 @@
 import { TabState } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { OutputEditor } from 'renderer/pages/shared/OutputEditor';
-import { useTransformSwc } from 'renderer/server-resources/useTransformSwc';
+import {
+	TransformSwcResult,
+	useTransformSwc,
+} from 'renderer/server-resources/useTransformSwc';
+import { TransformStatus } from '../shared/TransformStatus';
+import { useGetLocalSwcPlugins } from './swccOutput/useGetLocalSwcPlugins';
+import { useWatchFileChange } from './swccOutput/useWatchFileChange';
 
 type SwcOutputProps = {
 	tab: TabState;
 };
 
 export const SwcOutput = ({ tab }: SwcOutputProps) => {
-	const { data, error } = useTransformSwc({
+	const { data, error, refetch, isRefetching, isFetching } = useTransformSwc({
 		file: tab.fileTransform,
 		transformConfig: tab.comparerConfig.swc,
 	});
 
-	const code = data || (error as string);
+	const filePaths = useGetLocalSwcPlugins(tab);
+	useWatchFileChange({ onChange: refetch, filePaths });
+	const { code } = (data || error) as TransformSwcResult;
 
-	return <OutputEditor code={code} viewMode="javascript" />;
+	return (
+		<>
+			<TransformStatus isLoading={isFetching || isRefetching} />
+			<OutputEditor code={code} viewMode="javascript" />
+		</>
+	);
 };

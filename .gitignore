@@ -28,4 +28,5 @@ npm-debug.log.*
 *.sass.d.ts
 *.scss.d.ts
 
-.package_cache
+.swc_viewer_cache
+.swc

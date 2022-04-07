@@ -16,7 +16,7 @@ type DownloadPackageArgs = {
 
 const homedir = require('os').homedir();
 
-export const packageCacheFolder = join(homedir, '.package_cache');
+export const packageCacheFolder = join(homedir, '.swc_viewer_cache');
 
 export const downloadPackage = async ({
 	packageName,

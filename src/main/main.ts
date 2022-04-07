@@ -9,12 +9,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, Menu } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
 import { setUpTopBarActions } from './topBarActions';
 import { setUpTransformActions } from './transform';
+import { setupFileWatcher } from './io';
+import { buildMenu } from './menu';
 
 export default class AppUpdater {
 	constructor() {
@@ -80,9 +82,10 @@ const createWindow = async () => {
 	});
 	mainWindow.maximize();
 
-	Menu.setApplicationMenu(new Menu());
+	buildMenu();
 	setUpTopBarActions(mainWindow);
 	setUpTransformActions();
+	setupFileWatcher(mainWindow);
 
 	mainWindow.webContents.session.webRequest.onBeforeSendHeaders(
 		(details, callback) => {
