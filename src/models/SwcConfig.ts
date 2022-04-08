@@ -203,7 +203,7 @@ export interface TransformationOutput {
 	code: string;
 }
 
-export type Plugin = string | [string, never];
+export type Plugin = string | [string, unknown];
 
 export interface SwcConfig {
 	jsc: {

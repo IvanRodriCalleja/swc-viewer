@@ -1,10 +1,10 @@
 import { Box } from '@chakra-ui/react';
-import { Suspense } from 'react';
 import { BabelLogo } from 'renderer/pages/shared/BabelLogo';
 
 import { TabState } from '../../viewerContext/viewerContextReducer';
 import { BabelConfigForm } from './babelTransform/BabelConfigForm';
 import { BabelOutput } from './babelTransform/BabelOutput';
+import { OutputContainer } from './shared/OutputContainer';
 import { TransformHeader } from './shared/TransformHeader';
 
 type BabelTransformProps = {
@@ -26,11 +26,9 @@ export const BabelTransform = ({ tab }: BabelTransformProps) => {
 					/>
 				)}
 			</TransformHeader>
-			<Box width="full" height="calc(100% - 56px)" borderWidth="1px">
-				<Suspense fallback={<div>Loading...</div>}>
-					<BabelOutput tab={tab} />
-				</Suspense>
-			</Box>
+			<OutputContainer>
+				<BabelOutput tab={tab} />
+			</OutputContainer>
 		</Box>
 	);
 };

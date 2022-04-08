@@ -5,6 +5,8 @@ export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			suspense: true,
+			refetchOnWindowFocus: false,
+			refetchOnReconnect: false,
 		},
 	},
 });

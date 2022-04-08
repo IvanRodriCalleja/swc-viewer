@@ -1,18 +1,27 @@
 import { TabState } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { OutputEditor } from 'renderer/pages/shared/OutputEditor';
-import { useTransformBabel } from 'renderer/server-resources/useTransformBabel';
+import {
+	TransformBabelResult,
+	useTransformBabel,
+} from 'renderer/server-resources/useTransformBabel';
+import { TransformStatus } from '../shared/TransformStatus';
 
 type BabelOutputProps = {
 	tab: TabState;
 };
 
 export const BabelOutput = ({ tab }: BabelOutputProps) => {
-	const { data, error } = useTransformBabel({
+	const { data, error, isRefetching, isFetching } = useTransformBabel({
 		file: tab.fileTransform,
 		transformConfig: tab.comparerConfig.babel,
 	});
 
-	const code = data || (error as string);
+	const { code } = (data || error) as TransformBabelResult;
 
-	return <OutputEditor code={code} viewMode="javascript" />;
+	return (
+		<>
+			<TransformStatus isLoading={isFetching || isRefetching} />
+			<OutputEditor code={code} viewMode="javascript" />
+		</>
+	);
 };

@@ -1,5 +1,6 @@
-import Editor, { OnChange, OnValidate, useMonaco } from '@monaco-editor/react';
-import { useEffect } from 'react';
+import { editor } from 'monaco-editor';
+import Editor, { OnChange, useMonaco } from '@monaco-editor/react';
+import { MutableRefObject, useEffect } from 'react';
 import type { JSONSchema6 } from 'json-schema';
 import { editorOptions } from 'renderer/utils/baseEditorConfig';
 
@@ -11,16 +12,16 @@ type JsonConfigEditorProps = {
 		schema: JSONSchema6;
 	};
 	value: string;
+	validateRef: MutableRefObject<() => editor.IMarker[] | undefined>;
 	onChange: OnChange;
-	onValidate: OnValidate;
 };
 
 export const JsonConfigEditor = ({
 	schema,
 	path,
 	value,
+	validateRef,
 	onChange,
-	onValidate,
 }: JsonConfigEditorProps) => {
 	const monaco = useMonaco();
 
@@ -30,10 +31,13 @@ export const JsonConfigEditor = ({
 		}
 
 		monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-			validate: true,
 			schemas: [schema],
 		});
 	}, [monaco, schema]);
+
+	useEffect(() => {
+		validateRef.current = () => monaco?.editor.getModelMarkers({});
+	}, [validateRef, monaco]);
 
 	return (
 		<Editor
@@ -48,7 +52,6 @@ export const JsonConfigEditor = ({
 			theme="vs-dark"
 			height="100%"
 			onChange={onChange}
-			onValidate={onValidate}
 		/>
 	);
 };

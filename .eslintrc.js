@@ -11,6 +11,7 @@ module.exports = {
 		'react/require-default-props': 'off',
 		'react/jsx-props-no-spreading': 'off',
 		'@typescript-eslint/no-throw-literal': 'off',
+		'@typescript-eslint/return-await': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 2020,
