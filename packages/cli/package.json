@@ -1,0 +1,14 @@
+{
+  "name": "@swc-viewer/cli",
+  "description": "Desktop application to compare SWC and Babel output in real time",
+  "version": "0.0.1",
+	"private": true,
+	"bin": {
+    "swc-viewer": "./index.js"
+  },
+  "license": "MIT",
+	"optionalDependencies": {
+    "@swc-viewer/darwin-x64": "0.0.1",
+		"@swc-viewer/darwin-arm64": "0.0.1"
+  }
+}

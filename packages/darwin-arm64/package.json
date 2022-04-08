@@ -1,0 +1,7 @@
+{
+  "name": "@swc-viewer/darwin-arm64",
+  "description": "Desktop application to compare SWC and Babel output in real time",
+	"version": "0.0.1",
+	"private": true,
+	"main": "./index.js"
+}

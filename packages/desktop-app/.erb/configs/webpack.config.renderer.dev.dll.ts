@@ -1,6 +1,4 @@
-/**
- * Builds the DLL for development electron renderer process
- */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 import webpack from 'webpack';
 import path from 'path';
