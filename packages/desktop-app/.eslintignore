@@ -18,9 +18,9 @@ node_modules
 # OSX
 .DS_Store
 
-packages/desktop-app/release/app/dist
-packages/desktop-app/release/build
-packages/desktop-app/.erb/dll
+release/app/dist
+release/build
+.erb/dll
 
 .idea
 npm-debug.log.*
@@ -30,4 +30,4 @@ npm-debug.log.*
 
 # eslint ignores hidden directories by default:
 # https://github.com/eslint/eslint/issues/8429
-!packages/desktop-app/.erb
+!.erb

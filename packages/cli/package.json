@@ -1,0 +1,33 @@
+{
+  "name": "swc-viewer",
+  "description": "Desktop application to compare SWC and Babel output in real time",
+  "version": "0.0.1",
+	"private": true,
+	"files": ["index.js"],
+	"bin": {
+    "swc-viewer": "./index.js"
+  },
+  "license": "MIT",
+	"optionalDependencies": {
+    "@swc-viewer/darwin-x64": "0.0.1",
+		"@swc-viewer/darwin-arm64": "0.0.1"
+  },
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanRodriCalleja/swc-viewer.git"
+  },
+  "author": {
+    "name": "Iván Rodríguez Calleja",
+    "email": "swc-viewer@gmail.com",
+    "url": "https://github.com/IvanRodriCalleja"
+  },
+  "bugs": {
+    "url": "https://github.com/IvanRodriCalleja/swc-viewer/issues"
+  },
+  "keywords": [
+    "swc",
+    "viewer",
+    "comparer"
+  ],
+  "homepage": "https://github.com/IvanRodriCalleja/swc-viewer#readme"
+}

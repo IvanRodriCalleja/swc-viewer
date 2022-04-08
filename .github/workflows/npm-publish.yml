@@ -1,0 +1,64 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - v*
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag"
+        required: true
+
+jobs:
+  build-mac:
+    runs-on: ${{ matrix.os }}
+		strategy:
+      matrix:
+        os: [macos-latest]
+        node-version: [17.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+         path: '**/node_modules'
+         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 'Install dependencies'
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: 'Build apps'
+        working-directory: ./packages/desktop-app
+        run: yarn package
+
+      - name: 'Prepare apps'
+        working-directory: ./packages/desktop-app
+        run: yarn prepare:apps
+
+      - id: publish swc-viewer
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/cli/package.json
+          tag: ${{ github.event.inputs.tag }}
+
+      - id: publish @swc-viewer/darwin-x64
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/darwin-x64/package.json
+          tag: ${{ github.event.inputs.tag }}
+
+      - id: publish @swc-viewer/darwin-arm64
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/darwin-arm64/package.json
+          tag: ${{ github.event.inputs.tag }}
