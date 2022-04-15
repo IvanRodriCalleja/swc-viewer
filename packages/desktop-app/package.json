@@ -1,5 +1,5 @@
 {
-  "name": "@swc-viewer/desktop-app",
+  "name": "@swc/viewer-desktop-app",
   "description": "Desktop application to compare SWC and Babel output in real time",
   "version": "0.0.1",
   "private": true,
