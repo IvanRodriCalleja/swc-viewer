@@ -1,0 +1,13 @@
+{
+ "name": "swc-viewer-e2e",
+ "version": "1.0.0",
+ "main": "index.js",
+ "license": "MIT",
+ "scripts": {
+  "test": "npx playwright test"
+ },
+ "devDependencies": {
+  "@playwright/test": "^1.21.0",
+  "playwright": "^1.21.0"
+ }
+}
