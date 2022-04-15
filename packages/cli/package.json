@@ -2,7 +2,6 @@
   "name": "swc-viewer",
   "description": "Desktop application to compare SWC and Babel output in real time",
   "version": "0.0.1",
-	"private": true,
 	"files": ["index.js"],
 	"bin": {
     "swc-viewer": "./index.js"
