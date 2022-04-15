@@ -40,23 +40,53 @@ jobs:
         working-directory: ./packages/desktop-app
         run: yarn prepare:apps
 
-      - name: 'publish swc-viewer'
-        uses: JS-DevTools/npm-publish@v1
+      - name: 'github publish swc-viewer'
+        uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./packages/cli/package.json
-          tag: ${{ github.event.inputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ github.event.inputs.tag }}
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'npm publish swc-viewer'
+        run: |
+          cd ./packages/cli
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          npm publish --access public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: 'publish  @swc-viewer/darwin-x64'
-        uses: JS-DevTools/npm-publish@v1
+      - name: 'github publish @swc-viewer/darwin-x64'
+        uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./packages/darwin-x64/package.json
-          tag: ${{ github.event.inputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ github.event.inputs.tag }}
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'npm publish @swc-viewer/darwin-x64'
+        run: |
+          cd ./packages/darwin-x64
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          npm publish --access public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: 'publish @swc-viewer/darwin-arm64'
-        uses: JS-DevTools/npm-publish@v1
+      - name: 'github publish @swc-viewer/darwin-arm64'
+        uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./packages/darwin-arm64/package.json
-          tag: ${{ github.event.inputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ github.event.inputs.tag }}
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'npm publish @swc-viewer/darwin-arm64'
+        run: |
+          cd ./packages/darwin-arm64
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          npm publish --access public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
