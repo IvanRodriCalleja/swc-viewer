@@ -1,9 +1,6 @@
 name: Build
 
 on:
-  push:
-    tags:
-      - v*
   workflow_dispatch:
     inputs:
       tag:
@@ -12,11 +9,12 @@ on:
 
 jobs:
   build-mac:
-    runs-on: ${{ matrix.os }}
-		strategy:
+    strategy:
       matrix:
         os: [macos-latest]
         node-version: [17.x]
+    runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
