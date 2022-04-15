@@ -40,21 +40,21 @@ jobs:
         working-directory: ./packages/desktop-app
         run: yarn prepare:apps
 
-      - id: publish swc viewer
+      - name: 'publish swc-viewer'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/cli/package.json
           tag: ${{ github.event.inputs.tag }}
 
-      - id: publish  swc viewer darwin x64
+      - name: 'publish  @swc-viewer/darwin-x64'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/darwin-x64/package.json
           tag: ${{ github.event.inputs.tag }}
 
-      - id: publish swc viewer darwin arm64
+      - id: 'publish @swc-viewer/darwin-arm64'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
