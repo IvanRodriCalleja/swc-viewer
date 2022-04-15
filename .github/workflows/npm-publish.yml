@@ -54,7 +54,7 @@ jobs:
           package: ./packages/darwin-x64/package.json
           tag: ${{ github.event.inputs.tag }}
 
-      - id: 'publish @swc-viewer/darwin-arm64'
+      - name: 'publish @swc-viewer/darwin-arm64'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
