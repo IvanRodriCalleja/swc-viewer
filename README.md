@@ -1,10 +1,10 @@
 # SWC Viewer
 
-**SWC Viewer** is a CLI tool that launch desktop application to **try** improve developer experience to develop **SWC** plugins or directly **SWC**. The aim of this project is to allow to compare **SWC** and **Babel** output in realtime.
+**SWC Viewer** is a CLI tool that runs a desktop application in order to give a fast visual feedback to **swc** developers about the transformations they are developing. The aim of this project is to allow to compare **SWC** and **Babel** output in realtime.
 
 ![main](./docs/images/main.png)
 
-This tool provide the ability to compare **SWC** output with **Babel** output from the same input file. You can customize **SWC** and **Babel** transform with plugins, presets, etc. You have te ability os using local swc plugins and have a watcher to re-run transformation with new plugin version in order to add good DX to swc plugin developers
+This tool provide the ability to compare **SWC** output with **Babel** output from the same input file. You can customize **SWC** and **Babel** transform with plugins, presets, etc. You have te ability of using local swc plugins and have a watcher to re-run transformation with new plugin version in order to add good DX to swc plugin developers
 
 ## Installation and run
 
@@ -16,7 +16,7 @@ This tool provide the ability to compare **SWC** output with **Babel** output fr
 
 ## Usage
 
-You can drag and drop files or click in the area and pick a file from file chooser. **Only .js, .jsx, .ts and .tsx files are supported to transform**. You can add more tabs to upload more files. The app download and execute dependencies on runtime, the first time it is used or when a unused version (new versions) are selected could take some seconds because it has to download (max 5s). Both (swc and babel) load plugins and presets on demand when are configured, it can make the first transformation can be slow but in the following it will be fast.
+You can drag and drop files or click in the area and pick a file from file chooser. **Only .js, .jsx, .ts and .tsx files are supported to transform**. You can add more tabs to upload more files. The app download and execute dependencies on runtime like `@swc/core`, `@babel/core`, swc plugins, babel plugins and presetc.
 
 ![upload-file](./docs/images/upload-file.png)
 
@@ -28,7 +28,7 @@ In order to transform the input by **SWC** the **swc-viewer** uses the library [
 
 ### SWC plugins
 
-You can configure **rust** plugins to transform your code. **Be careful because plugins are experimental and depending on @swc/core version and your plugin version the invokation can fail**. Right now the plugin version can't be configured that's why always the last version in npm is executed. You can configure like: 
+You can configure **rust** plugins to transform your code. **Be careful because plugins are experimental and depending on @swc/core version and your plugin version the invocation can fail**. Right now the plugin version can't be configured that's why always the last version in npm is used. You can configure like: 
 
 ```json
 {
@@ -50,7 +50,7 @@ You can configure **rust** plugins to transform your code. **Be careful because 
 
 ### SWC local plugins development
 
-You can use local plugins that you have in your machine, this is powerful for **swc** plugin developers. When a local plugin is detected in configuration a watcher is automatically added to this file in order to re-run the transformation with the new plugin version. This behavior allow to develop an swc plugin with real time results and compare directly with babel plugin output.
+You can use local plugins that you have in your machine, this is powerful for **SWC** plugin developers. When a local plugin is detected in configuration a watcher is automatically added to this file in order to re-run the transformation with the new plugin version. This behavior allow to develop an swc plugin with real time results and compare directly with babel plugin output.
 
 ```json
 {
@@ -70,11 +70,13 @@ You can use local plugins that you have in your machine, this is powerful for **
 }
 ```
 
+An example of realtime development oof an **SWC** plugin:
+
 ![local-plugin](./docs/images/local-plugin.gif)
 
 # Babel configuration
 
-You can configure all babel options as described by [babel config](https://babeljs.io/docs/en/options). The only restriction is that in order to use plugins or preset you need to use it with the real package name, for example: 
+You can configure all **Babel** options as described by [babel config](https://babeljs.io/docs/en/options). To make the transform the **Js API** is used. The only restriction is that in order to use plugins or preset you need to use it with the real package name (any plugin or preset should work and be used as a normal **Babel** configuration), for example: 
 
 **No configure like this**
 
@@ -114,15 +116,15 @@ Caused by:
 
 This is caused because the **SWC** version and the plugin version are not compatible, if this happens with local plugin, update your plugin to work with new versions, if the plugin is a third party plugin you need to use and older version.
 
-- First transformation takes nuch time
+- First transformation takes much time **(around 5s)**
 
-In this case only happens with the first transfoormation, this is caused because dependencies like swc, babel, plugins and preset have to be downloaded on runtime and executed.
+This only happens when a package is used for the first time (`@swc/core`, `@babel/core`, plugins and presets). WHen a package version is changed it happens too. This is caused because **swc-viewer** have to download a specific package version on runtime and execute the transform process, once the specific package version has been downloaded it is cached to have faster transformations (lass than 1s).
 
 # Roadmap
 
 - Add support for linux
 - Add support for windows
-- Add support for local `@swc/core` transformation
+- Add support for local `@swc/core` transformation (mainly for **SWC** developers)
 - Add support for folder tree
 - Add support for open folder with CLI
 - Add support for AST comparison
