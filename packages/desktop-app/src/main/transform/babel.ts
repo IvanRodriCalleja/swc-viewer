@@ -8,7 +8,6 @@ import {
 } from '../../renderer/pages/home/viewerContext/viewerContextReducer';
 import { loadPlugins } from './babel/babelPluginLoader';
 import { getModule } from './shared/packageManager';
-// import { loadPresets } from './babel/babelPresetsLoader';
 
 type TransformArgs = {
 	transformConfig: TransformerConfig<BabelConfig>;
