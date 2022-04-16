@@ -23,12 +23,18 @@ if (existsSync(cliPackage)) {
 }
 fs.copy(readme, cliPackage).then(() => console.log('README copied!!'));
 
+if (!existsSync(appDarwin64Package)) {
+	mkdirSync(appDarwin64Package, { recursive: true });
+}
 if (existsSync(appDarwin64Package)) {
 	rmSync(appDarwin64Package, { recursive: true });
 	mkdirSync(appDarwin64Package);
 }
 zip(appDarwin64, appDarwin64Zip).then(() => console.log('Compressed app'));
 
+if (!existsSync(appDarwinArm64Package)) {
+	mkdirSync(appDarwinArm64Package, { recursive: true });
+}
 if (existsSync(appDarwinArm64Package)) {
 	rmSync(appDarwinArm64Package, { recursive: true });
 	mkdirSync(appDarwinArm64Package);
