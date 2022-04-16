@@ -72,7 +72,7 @@ You can use local plugins that you have in your machine, this is powerful for **
 
 An example of realtime development oof an **SWC** plugin:
 
-![swc-local-plugin-watcher](./docs/images/swc-local-plugin-watcher.gif)
+![local-plugin-example](./docs/images/local-plugin-example.gif)
 
 # Babel configuration
 
