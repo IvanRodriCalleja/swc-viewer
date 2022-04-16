@@ -1,18 +1,17 @@
 {
-  "name": "@swc/viewer-darwin-x64",
+  "name": "@swc-viewer/darwin-x64",
   "description": "Desktop application to compare SWC and Babel output in real time",
-	"version": "0.0.1",
-	"main": "./index.js",
-	"files": ["index.js", "app"],
-	"repository": {
+  "version": "0.0.1",
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "app"
+  ],
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/IvanRodriCalleja/swc-viewer.git"
   },
-  "author": {
-    "name": "Iván Rodríguez Calleja",
-    "email": "swc-viewer@gmail.com",
-    "url": "https://github.com/IvanRodriCalleja"
-  },
+  "author": "Iván Rodríguez Calleja <swc-viewer@gmail.com> (https://github.com/IvanRodriCalleja)",
   "bugs": {
     "url": "https://github.com/IvanRodriCalleja/swc-viewer/issues"
   },
@@ -21,5 +20,9 @@
     "viewer",
     "comparer"
   ],
-  "homepage": "https://github.com/IvanRodriCalleja/swc-viewer#readme"
+  "homepage": "https://github.com/IvanRodriCalleja/swc-viewer#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
 }

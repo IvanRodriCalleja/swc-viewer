@@ -1,5 +1,5 @@
 {
-  "name": "@swc/viewer",
+  "name": "swc-viewer",
   "description": "Desktop application to compare SWC and Babel output in real time",
   "version": "0.0.1",
 	"files": ["index.js"],
