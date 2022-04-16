@@ -1,7 +1,7 @@
 {
   "name": "swc-viewer-desktop-app",
   "description": "Desktop application to compare SWC and Babel output in real time",
-  "version": "0.0.3",
+  "version": "0.0.10",
   "private": true,
   "workspaces": {
     "nohoist": [
@@ -13,7 +13,7 @@
     "build:main": "cross-env NODE_ENV=production node ./.erb/configs/build.main.js",
     "build:preload": "cross-env NODE_ENV=production esbuild ./src/main/preload.js --bundle --outfile=release/app/dist/main/preload.js --platform=node --external:electron",
     "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
-    "prepare:apps": "node ./.erb/scripts/copy-apps.js",
+    "prepare:apps": "node ./.erb/scripts/prepare-apps.js",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
     "package": "ts-node ./.erb/scripts/clean.js dist && yarn build && electron-builder build --publish never",
@@ -160,11 +160,12 @@
     "node-fetch": "2.6.7",
     "react": "18.0.0-rc.2",
     "react-dom": "18.0.0-rc.2",
-    "react-query": "^3.34.16"
+    "react-query": "^3.34.16",
+    "zip-a-folder": "^1.1.3"
   },
-	"resolutions": {
-		"plist": "3.0.5",
-		"minimist": "1.2.6",
-		"async": "2.6.4"
-	}
+  "resolutions": {
+    "plist": "3.0.5",
+    "minimist": "1.2.6",
+    "async": "2.6.4"
+  }
 }

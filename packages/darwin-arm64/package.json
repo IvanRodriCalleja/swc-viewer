@@ -1,10 +1,14 @@
 {
   "name": "swc-viewer-darwin-arm64",
   "description": "Desktop application to compare SWC and Babel output in real time",
-	"version": "0.0.3",
-	"main": "./index.js",
-	"files": ["index.js", "app"],
-	"repository": {
+  "version": "0.0.10",
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "postinstall.js",
+    "app"
+  ],
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/IvanRodriCalleja/swc-viewer.git"
   },
@@ -21,5 +25,12 @@
     "viewer",
     "comparer"
   ],
-  "homepage": "https://github.com/IvanRodriCalleja/swc-viewer#readme"
+  "homepage": "https://github.com/IvanRodriCalleja/swc-viewer#readme",
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "dependencies": {
+    "decompress": "^4.2.1"
+  },
+  "license": "MIT"
 }

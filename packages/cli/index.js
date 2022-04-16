@@ -5,8 +5,8 @@ const { exec } = require('child_process');
 
 const appPaths = {
 	darwin: {
-		x64: '@swc/viewer-darwin-x64',
-		arm64: '@swc/viewer-darwin-arm64',
+		x64: 'swc-viewer-darwin-x64',
+		arm64: 'swc-viewer-darwin-arm64',
 	},
 };
 
