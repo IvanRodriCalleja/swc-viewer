@@ -4,6 +4,7 @@ import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
 import { HomePage } from './Home.page';
 import * as viewerContext from './home/ViewerContext';
 import {
+	OutputType,
 	TabState,
 	TabType,
 	ViewerAction,
@@ -14,6 +15,7 @@ const createFakeTabs = (count: number): TabState[] =>
 	[...Array(count)].map((_, index) => ({
 		id: index,
 		type: TabType.SwcBabelPluginComparer,
+		outputType: OutputType.Code,
 		fileTransform: {
 			name: `Untitled-${index}`,
 			path: `Untitled-${index}`,

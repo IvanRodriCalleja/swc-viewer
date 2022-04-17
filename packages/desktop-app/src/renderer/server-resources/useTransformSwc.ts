@@ -2,6 +2,7 @@ import { SwcConfig } from 'models/SwcConfig';
 import { useQuery } from 'react-query';
 import {
 	FileTransform,
+	OutputType,
 	TransformerConfig,
 } from 'renderer/pages/home/viewerContext/viewerContextReducer';
 import { transformSwc as transformSwcAction } from 'ipcActions';
@@ -9,6 +10,7 @@ import { transformSwc as transformSwcAction } from 'ipcActions';
 type TransformSwc = {
 	transformConfig: TransformerConfig<SwcConfig>;
 	file: FileTransform;
+	outputType: OutputType;
 };
 
 export type TransformSwcResult = {

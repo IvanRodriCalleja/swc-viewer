@@ -7,7 +7,7 @@ export const TabPanel: FC<{ tabId: number }> = ({ children, tabId }) => {
 	return (
 		<Box
 			id={`tab-panel-${tabId}`}
-			data-testid="active-tab-panel"
+			data-testid="active-panel-tab"
 			background={bg}
 			width="full"
 			flexGrow={1}

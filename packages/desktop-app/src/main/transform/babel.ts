@@ -4,20 +4,22 @@ import { BabelConfig } from '../../models/BabelConfig';
 import { BabelModule } from '../../models/BabelModule';
 import {
 	FileTransform,
+	OutputType,
 	TransformerConfig,
 } from '../../renderer/pages/home/viewerContext/viewerContextReducer';
 import { loadPlugins } from './babel/babelPluginLoader';
 import { getModule } from './shared/packageManager';
 
-type TransformArgs = {
+export type TransformBabel = {
 	transformConfig: TransformerConfig<BabelConfig>;
 	file: FileTransform;
+	outputType: OutputType;
 };
 
 export const transformBabel = async ({
 	file,
 	transformConfig,
-}: TransformArgs) => {
+}: TransformBabel) => {
 	const { config, version } = transformConfig;
 	const { code } = file;
 
@@ -34,5 +36,5 @@ export const transformBabel = async ({
 		plugins,
 		presets,
 	})) as BabelFileResult;
-	return transformed.code;
+	return transformed.code as string;
 };

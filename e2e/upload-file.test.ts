@@ -18,12 +18,12 @@ const allowedFiles = ['.js', '.jsx', '.ts', '.tsx'];
 test.describe('Check tabs behavior', () => {
 	test.beforeAll(async () => {
 		page = await electronApp.firstWindow();
-		await page.waitForSelector('[data-testid="active-tab-panel"]');
+		await page.waitForSelector('[data-testid="active-panel-tab"]');
 	});
 
 	test.beforeEach(async () => {
 		await page.reload();
-		await page.waitForSelector('[data-testid="active-tab-panel"]');
+		await page.waitForSelector('[data-testid="active-panel-tab"]');
 	});
 
 	allowedFiles.forEach((fileExtension) => {

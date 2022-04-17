@@ -2,6 +2,7 @@ import { SwcConfig } from '../../models/SwcConfig';
 import { SwcModule } from '../../models/SwcModule';
 import {
 	FileTransform,
+	OutputType,
 	TransformerConfig,
 } from '../../renderer/pages/home/viewerContext/viewerContextReducer';
 import { getModule } from './shared/packageManager';
@@ -20,6 +21,7 @@ const handleSwcError = (error: unknown): string => {
 export type TransformSwc = {
 	transformConfig: TransformerConfig<SwcConfig>;
 	file: FileTransform;
+	outputType: OutputType;
 };
 
 export const transformSwc = async ({ transformConfig, file }: TransformSwc) => {
@@ -45,4 +47,21 @@ export const transformSwc = async ({ transformConfig, file }: TransformSwc) => {
 	} catch (error) {
 		throw handleSwcError(error);
 	}
+};
+
+type ParseSwc = {
+	transformConfig: TransformerConfig<SwcConfig>;
+	transformedCode: string;
+};
+
+export const parseSwc = async ({
+	transformConfig,
+	transformedCode,
+}: ParseSwc) => {
+	const { config, version } = transformConfig;
+
+	const swc = await getModule<SwcModule>({ packageName: '@swc/core', version });
+	const ast = await swc.parseSync(transformedCode, config.jsc.parser);
+
+	return JSON.stringify(ast, null, 2);
 };

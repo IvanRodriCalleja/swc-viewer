@@ -1,7 +1,7 @@
 import { BabelConfig } from 'models/BabelConfig';
 import { SwcConfig } from 'models/SwcConfig';
-import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
-import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
+import { babelBaseConfig } from '../../../../renderer/utils/babelBaseConfig';
+import { swcBaseConfig } from '../../../../renderer/utils/swcBaseConfig';
 
 export enum TabType {
 	SwcBabelPluginComparer,
@@ -23,9 +23,15 @@ export type ComparerConfig = {
 	swc: TransformerConfig<SwcConfig>;
 };
 
+export enum OutputType {
+	Code = 'Code',
+	AST = 'AST',
+}
+
 export type TabState = {
 	id: number;
 	type: TabType;
+	outputType: OutputType;
 	fileTransform: FileTransform;
 	comparerConfig: ComparerConfig;
 };
@@ -47,6 +53,7 @@ export enum ViewerAction {
 	UpdateSwcVersion,
 	UpdateSwcConfig,
 	UpdateBabelConfig,
+	UpdateOutputType,
 }
 
 export type ViewerActionType =
@@ -102,6 +109,13 @@ export type ViewerActionType =
 				tabId: number;
 				config: TransformerConfig<BabelConfig>;
 			};
+	  }
+	| {
+			type: ViewerAction.UpdateOutputType;
+			payload: {
+				tabId: number;
+				outputType: OutputType;
+			};
 	  };
 
 type ViewerReducer = (
@@ -123,6 +137,7 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 					{
 						id: tabId,
 						type: TabType.SwcBabelPluginComparer,
+						outputType: OutputType.Code,
 						fileTransform: {
 							name: `Untitled-${tabId}`,
 							path: `Untitled-${tabId}`,
@@ -247,6 +262,19 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 									...tab.comparerConfig,
 									babel: action.payload.config,
 								},
+						  }
+						: tab
+				),
+			};
+		}
+		case ViewerAction.UpdateOutputType: {
+			return {
+				...state,
+				tabs: state.tabs.map((tab) =>
+					tab.id === action.payload.tabId
+						? {
+								...tab,
+								outputType: action.payload.outputType,
 						  }
 						: tab
 				),

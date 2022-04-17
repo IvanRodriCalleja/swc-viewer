@@ -10,11 +10,13 @@ import {
 	ViewerActionType,
 	ViewerAction,
 	TransformerConfig,
+	OutputType,
 } from './viewerContextReducer';
 
 const baseTab: TabState = {
 	id: 1,
 	type: TabType.SwcBabelPluginComparer,
+	outputType: OutputType.Code,
 	fileTransform: {
 		path: '',
 		name: '',
@@ -49,6 +51,7 @@ describe('viewerContextReducer', () => {
 			expect(newTab).toEqual({
 				id: 2,
 				type: TabType.SwcBabelPluginComparer,
+				outputType: OutputType.Code,
 				fileTransform: {
 					path: 'Untitled-2',
 					name: 'Untitled-2',
@@ -81,6 +84,7 @@ describe('viewerContextReducer', () => {
 			expect(newTab).toEqual({
 				id: 1,
 				type: TabType.SwcBabelPluginComparer,
+				outputType: OutputType.Code,
 				fileTransform: {
 					path: 'Untitled-1',
 					name: 'Untitled-1',
@@ -115,6 +119,7 @@ describe('viewerContextReducer', () => {
 			expect(newTab).toEqual({
 				id: 3,
 				type: TabType.SwcBabelPluginComparer,
+				outputType: OutputType.Code,
 				fileTransform: {
 					path: 'Untitled-3',
 					name: 'Untitled-3',
@@ -174,6 +179,7 @@ describe('viewerContextReducer', () => {
 				{
 					id: 2,
 					type: TabType.SwcBabelPluginComparer,
+					outputType: OutputType.Code,
 					fileTransform: {
 						path: '',
 						name: '',
@@ -214,6 +220,7 @@ describe('viewerContextReducer', () => {
 				{
 					id: 2,
 					type: TabType.SwcBabelPluginComparer,
+					outputType: OutputType.Code,
 					fileTransform: {
 						path: '',
 						name: '',

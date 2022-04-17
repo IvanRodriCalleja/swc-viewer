@@ -103,6 +103,21 @@ You can configure all **Babel** options as described by [babel config](https://b
 }
 ```
 
+# View configuration
+
+You can configure the output in the view, this can be  **Code** or can be **AST**.
+
+For **AST** type you have to take in count that the **AST** is taken after transform even for **Babel** but in both cases are **SWC AST** not **Babel AST** because it is not helpful if you try to replicate same output.
+
+## How SWC AST works in the viewer
+
+1- Input code is transformed with **SWC** with the configuration applied
+2- AST is generated with **SWC** from the output of the previous step with the **jsc.parser** from the configuration
+
+## How Babel AST works in the viewer
+
+1- Input code is transformed with **Babel** with the configuration applied
+2- AST is generated with **SWC** from the output of the previous step with the **jsc.parser** from the configuration
 # Known issues
 
 - SWC Plugin invocation error
