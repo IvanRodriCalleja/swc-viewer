@@ -1,7 +1,7 @@
 {
   "name": "swc-viewer-darwin-x64",
   "description": "Desktop application to compare SWC and Babel output in real time",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "./index.js",
   "files": [
     "index.js",
