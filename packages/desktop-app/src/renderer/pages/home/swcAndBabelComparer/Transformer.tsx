@@ -1,6 +1,8 @@
 import { Stack } from '@chakra-ui/react';
+
 import { TabState } from '../viewerContext/viewerContextReducer';
 import { BabelTransform } from './transformer/BabelTransform';
+import { ConfigViewPanel } from './transformer/ConfigViewPanel';
 import { SwcTransform } from './transformer/SwcTransform';
 import { UploadedContent } from './transformer/UploadedContent';
 
@@ -15,8 +17,12 @@ export const Transformer = ({ tab }: TransformerProps) => (
 		height="full"
 		direction="row"
 		position="relative"
+		display="flex"
+		flexDirection="column"
 	>
-		<Stack direction="row" width="full" height="full" spacing="6">
+		<ConfigViewPanel tab={tab} />
+
+		<Stack direction="row" width="full" flexGrow="1" spacing="6">
 			<SwcTransform tab={tab} />
 			<BabelTransform tab={tab} />
 		</Stack>

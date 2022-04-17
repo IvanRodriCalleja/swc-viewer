@@ -5,7 +5,7 @@ import { editorOptions } from 'renderer/utils/baseEditorConfig';
 
 type OutputEditorProps = {
 	code: string;
-	viewMode: 'javascript' | 'typescript';
+	viewMode: 'javascript' | 'typescript' | 'json';
 };
 
 export const OutputEditor = ({ viewMode, code }: OutputEditorProps) => {

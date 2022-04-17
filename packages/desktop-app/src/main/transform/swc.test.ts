@@ -1,5 +1,6 @@
 import { TransformSwc, transformSwc } from './swc';
 import * as packageVersionCache from './shared/packageVersioncache';
+import { OutputType } from '../../renderer/pages/home/viewerContext/viewerContextReducer';
 const mockPackageVersion = (mockResult: string) => {
 	jest
 		.spyOn(packageVersionCache, 'getPackageLastVersion')
@@ -24,6 +25,7 @@ describe('swc', () => {
 				name: 'random.js',
 				path: 'random.js',
 			},
+			outputType: OutputType.Code,
 		};
 
 		const transformed = await transformSwc(transform);
@@ -53,6 +55,7 @@ describe('swc', () => {
 				name: 'random.js',
 				path: 'random.js',
 			},
+			outputType: OutputType.Code,
 		};
 
 		const transformed = await transformSwc(transform);

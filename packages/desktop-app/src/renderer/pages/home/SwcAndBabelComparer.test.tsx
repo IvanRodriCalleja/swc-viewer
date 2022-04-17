@@ -3,6 +3,7 @@ import { babelBaseConfig } from 'renderer/utils/babelBaseConfig';
 import { swcBaseConfig } from 'renderer/utils/swcBaseConfig';
 import { SwcAndBabelComparer } from './SwcAndBabelComparer';
 import {
+	OutputType,
 	TabState,
 	TabType,
 	ViewerAction,
@@ -14,6 +15,7 @@ import * as uploader from './swcAndBabelComparer/FileUploader';
 const tab: TabState = {
 	id: 1,
 	type: TabType.SwcBabelPluginComparer,
+	outputType: OutputType.Code,
 	fileTransform: {
 		name: `Untitled-0`,
 		path: `Untitled-0`,

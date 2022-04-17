@@ -26,11 +26,11 @@ const fakePackageInstallation = (pkg: Package) => {
 describe('PackageManager', () => {
 	beforeAll(() => {
 		removeSwcViewerCacheFolder();
+		jest.setTimeout(10000);
 	});
 
 	describe('installPackage', () => {
 		it('Should install package', async () => {
-			jest.setTimeout(10000);
 			const pkg: Package = {
 				packageName: '@babel/core',
 				version: '7.17.9',
@@ -43,7 +43,6 @@ describe('PackageManager', () => {
 		});
 
 		it('Should not fail if package is already installed', async () => {
-			jest.setTimeout(10000);
 			const pkg: Package = {
 				packageName: '@babel/core',
 				version: '7.17.9',
@@ -57,7 +56,6 @@ describe('PackageManager', () => {
 		});
 
 		it('Should install package with binaries', async () => {
-			jest.setTimeout(10000);
 			const pkg: Package = {
 				packageName: '@swc/core',
 				version: '1.2.161',
@@ -94,7 +92,6 @@ describe('PackageManager', () => {
 		});
 
 		it('Should return true when package has been installed successfully', async () => {
-			jest.setTimeout(10000);
 			const pkg: Package = {
 				packageName: '@swc/core',
 				version: '1.2.158',
@@ -150,7 +147,6 @@ describe('PackageManager', () => {
 		});
 
 		it('Should return the module without installing when package is already installed', async () => {
-			jest.setTimeout(10000);
 			const pkg: Package = {
 				packageName: '@swc/core',
 				version: '1.2.155',
