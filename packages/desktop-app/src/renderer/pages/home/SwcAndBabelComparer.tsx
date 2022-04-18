@@ -12,10 +12,14 @@ export const SwcAndBabelComparer = ({ tab }: SwcAndBabelComparerProps) => {
 	const { dispatch } = useViewerContext();
 
 	const onFileUpload = (event: ProgressEvent<FileReader>, file: File) => {
+		const fileExtension = file.name.split('.').pop();
+		const isTypeScriptFile = ['tsx', 'ts'].some((ext) => ext === fileExtension);
+
 		dispatch({
 			type: ViewerAction.UpdateFileTransform,
 			payload: {
 				tabId: tab.id,
+				isTypeScriptFile,
 				fileTransform: {
 					name: file.name,
 					path: file.path,

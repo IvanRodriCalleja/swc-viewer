@@ -79,6 +79,7 @@ export type ViewerActionType =
 			type: ViewerAction.UpdateFileTransform;
 			payload: {
 				tabId: number;
+				isTypeScriptFile: boolean;
 				fileTransform: FileTransform;
 			};
 	  }
@@ -188,11 +189,47 @@ export const viewerReducer: ViewerReducer = (state, action) => {
 			};
 		}
 		case ViewerAction.UpdateFileTransform: {
+			const comparerConfig: ComparerConfig = {
+				swc: {
+					version: state.lastSwcVersion,
+					config: swcBaseConfig,
+				},
+				babel: {
+					version: state.lastBabelVersion,
+					config: babelBaseConfig,
+				},
+			};
+			if (action.payload.isTypeScriptFile) {
+				comparerConfig.swc.config = {
+					...comparerConfig.swc.config,
+					jsc: {
+						...comparerConfig.swc.config.jsc,
+						parser: {
+							syntax: 'typescript',
+							tsx: true,
+						},
+					},
+				};
+
+				comparerConfig.babel.config = {
+					...comparerConfig.babel.config,
+					filename: action.payload.fileTransform.name,
+					presets: [
+						...(comparerConfig.babel.config.presets || []),
+						'@babel/preset-typescript',
+					],
+				};
+			}
+
 			return {
 				...state,
 				tabs: state.tabs.map((tab) =>
 					tab.id === action.payload.tabId
-						? { ...tab, fileTransform: action.payload.fileTransform }
+						? {
+								...tab,
+								fileTransform: action.payload.fileTransform,
+								comparerConfig,
+						  }
 						: tab
 				),
 			};

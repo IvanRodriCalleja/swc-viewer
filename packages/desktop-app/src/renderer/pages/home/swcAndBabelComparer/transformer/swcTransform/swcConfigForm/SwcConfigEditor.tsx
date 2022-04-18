@@ -24,6 +24,7 @@ export const SwcConfigEditor = ({ tab }: SwcConfigEditorProps) => {
 		name: 'config',
 		validate: (value: string) => {
 			return new Promise((resolve) => {
+				console.log({ validation: validateEditor.current() });
 				// This is done to avoid async validation of monaco-editor
 				setTimeout(async () => {
 					const validations = validateEditor.current();
@@ -85,7 +86,7 @@ export const SwcConfigEditor = ({ tab }: SwcConfigEditorProps) => {
 		helpers.setValue(value);
 	};
 
-	const filePath = `${tab.id}/.swcrc`;
+	const filePath = `/${tab.id}/.swcrc`;
 
 	return (
 		<>
