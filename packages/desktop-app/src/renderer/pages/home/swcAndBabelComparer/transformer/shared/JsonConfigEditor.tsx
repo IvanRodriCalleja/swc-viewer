@@ -36,7 +36,12 @@ export const JsonConfigEditor = ({
 	}, [monaco, schema]);
 
 	useEffect(() => {
-		validateRef.current = () => monaco?.editor.getModelMarkers({});
+		validateRef.current = () => {
+			const model = monaco?.editor
+				.getModels()
+				.find((model) => model.uri.path === path);
+			return monaco?.editor.getModelMarkers({ resource: model?.uri });
+		};
 	}, [validateRef, monaco]);
 
 	return (

@@ -33,7 +33,7 @@ export const BabelConfigEditor = ({ tab }: BabelConfigEditorProps) => {
 		helpers.setValue(value);
 	};
 
-	const filePath = `${tab.id}/.babelrc`;
+	const filePath = `/${tab.id}/.babelrc`;
 
 	return (
 		<>
