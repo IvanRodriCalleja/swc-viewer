@@ -438,6 +438,7 @@ export const swcJsonSchema: JSONSchema6 = {
 			},
 			additionalProperties: false,
 		},
+		filename: { type: 'string' },
 		sourceMaps: {
 			anyOf: [{ type: 'boolean' }, { type: 'string', enum: ['inline'] }],
 		},
