@@ -1,7 +1,7 @@
 {
   "name": "swc-viewer-desktop-app",
   "description": "Desktop application to compare SWC and Babel output in real time",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "private": true,
   "workspaces": {
     "nohoist": [
@@ -161,6 +161,7 @@
     "react": "18.0.0-rc.2",
     "react-dom": "18.0.0-rc.2",
     "react-query": "^3.34.16",
+    "tar-install": "^0.2.2",
     "zip-a-folder": "^1.1.3"
   },
   "resolutions": {

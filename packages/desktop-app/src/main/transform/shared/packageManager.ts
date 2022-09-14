@@ -27,9 +27,25 @@ export const installPackage = (pkg: Package) => {
 	const packagePath = getPackagePath(pkg);
 	mkdirSync(packagePath, { recursive: true });
 
+	console.log(
+		`yarn add https://registry.npmjs.org/${packageName}/-/${subPackageName}-${version}.tgz`
+	);
+
 	return new Promise<void>((resolve, reject) => {
 		exec(
-			`npm install https://registry.npmjs.org/${packageName}/-/${subPackageName}-${version}.tgz`,
+			`yarn init --yes`,
+			{
+				cwd: packagePath,
+			},
+			(error) => {
+				if (error) {
+					reject(error);
+					return;
+				}
+			}
+		);
+		exec(
+			`yarn add https://registry.npmjs.org/${packageName}/-/${subPackageName}-${version}.tgz`,
 			{
 				cwd: packagePath,
 			},
